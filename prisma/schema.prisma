@@ -21,10 +21,10 @@ model User {
 }
 
 model Run {
-  id       Int      @id @default(autoincrement())
+  id       Int    @id @default(autoincrement())
   distance Float
-  time     Int
-  date     DateTime
+  time     String
+  date     String
   userId   Int
-  user     User     @relation(fields: [userId], references: [id])
+  user     User   @relation(fields: [userId], references: [id])
 }

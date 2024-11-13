@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const runController = require("../controllers/runController");
+const authMiddleware = require("../middlewares/authMiddleware");
 /**
  * @swagger
  * api/runs/createRun:
@@ -25,16 +26,16 @@ const runController = require("../controllers/runController");
  *                      example: 32.12
  *                    time:
  *                      type: string
- *                      format: time
+ *                      format: string
  *                      example: "00:00:00"
  *                    date:
  *                      type: string
- *                      format: date
+ *                      format: string
  *                      example: "1111-11-11"
  *
  *
  */
-router.post("/createRun", runController.createRun);
+router.post("/createRun", authMiddleware.verifyToken, runController.createRun);
 
 /**
  * @swagger
@@ -51,7 +52,7 @@ router.post("/createRun", runController.createRun);
  *
  *
  */
-router.get("/getRuns", runController.getRuns);
+router.get("/getRuns", authMiddleware.verifyToken, runController.getRuns);
 
 /**
  * @swagger
@@ -67,7 +68,11 @@ router.get("/getRuns", runController.getRuns);
  *         schema:
  *           type : integer
  */
-router.delete("/deleteRuns/:id", runController.deleteRun);
+router.delete(
+  "/deleteRuns/:id",
+  authMiddleware.verifyToken,
+  runController.deleteRun
+);
 
 /**
  * @swagger
@@ -101,6 +106,10 @@ router.delete("/deleteRuns/:id", runController.deleteRun);
  *                      example: "1111-11-11"
  *
  */
-router.put("/updateRuns/:id", runController.updateRun);
+router.put(
+  "/updateRuns/:id",
+  authMiddleware.verifyToken,
+  runController.updateRun
+);
 
 module.exports = router;

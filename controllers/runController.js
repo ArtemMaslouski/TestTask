@@ -11,10 +11,11 @@ exports.createRun = async (req, res) => {
       data: {
         distance,
         time,
-        date: new Date(date),
+        date,
+        userId: req.userId,
       },
     });
-    res.status(201).json(newRun, { message: "Забег успешно создан" });
+    res.status(201).json({ message: "Забег успешно создан" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -23,7 +24,9 @@ exports.createRun = async (req, res) => {
 // Получение данных о всех забегах
 exports.getRuns = async (req, res) => {
   try {
-    const runs = await prisma.run.findMany();
+    const runs = await prisma.run.findMany({
+      where: { userId: req.userId },
+    });
     res.json(runs);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -32,13 +35,13 @@ exports.getRuns = async (req, res) => {
 
 //Удаление данных о забеге исходя из его id
 exports.deleteRun = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
 
   try {
     await prisma.run.delete({
       where: { id: parseInt(id) },
     });
-    res.status(204).send({ message: "Забег успешно удален" });
+    res.status(204).json({ message: "Забег успешно удален" });
   } catch (error) {
     res.status(404).json({ error: "Забег не найден" });
   }
@@ -52,7 +55,7 @@ exports.updateRun = async (req, res) => {
   try {
     const updatedRun = await prisma.run.update({
       where: { id: parseInt(id) },
-      data: { distance, time, date: new Date(date) },
+      data: { distance, time, date },
     });
     res.status(201).json(updatedRun);
   } catch (error) {
