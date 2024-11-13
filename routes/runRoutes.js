@@ -53,8 +53,54 @@ router.post("/createRun", runController.createRun);
  */
 router.get("/getRuns", runController.getRuns);
 
+/**
+ * @swagger
+ * api/runs/deleteRun/{id}:
+ *  delete:
+ *     tags: [Run]
+ *     summary: Удаляет данные о забеге исходя из его id
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: Введите ID забега
+ *         schema:
+ *           type : integer
+ */
 router.delete("/deleteRuns/:id", runController.deleteRun);
 
+/**
+ * @swagger
+ * api/runs/updateRun/{id}:
+ *  put:
+ *      tags: [Run]
+ *      summary: Обновляет запись о забеге
+ *      response:
+ *          404:
+ *              description: Что-то пошло не так
+ *          201:
+ *              description: Данные успешно обновлены
+ *      requestBody:
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                  properties:
+ *                    distance:
+ *                      type: number
+ *                      format: double
+ *                      example: 32.12
+ *                    time:
+ *                      type: string
+ *                      format: time
+ *                      example: "00:00:00"
+ *                    date:
+ *                      type: string
+ *                      format: date
+ *                      example: "1111-11-11"
+ *
+ */
 router.put("/updateRuns/:id", runController.updateRun);
 
 module.exports = router;

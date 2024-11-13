@@ -50,6 +50,11 @@ exports.updateRun = async (req, res) => {
   const { distance, time, date } = req.body;
 
   try {
+    const updatedRun = await prisma.run.update({
+      where: { id: parseInt(id) },
+      data: { distance, time, date: new Date(date) },
+    });
+    res.status(201).json(updatedRun);
   } catch (error) {
     res.status(404).json({ error: "Забег не найден" });
   }
