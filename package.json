@@ -77,13 +77,18 @@
   },
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "nodemon": "^3.1.7"
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "jest-mock-extended": "^4.0.0-beta1",
+    "nodemon": "^3.1.7",
+    "ts-jest": "^29.2.5"
   }
 }

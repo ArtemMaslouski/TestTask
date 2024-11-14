@@ -4,9 +4,10 @@ const swaggerOptions = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "My Api",
+      title: "Swagger for Test Task",
       version: "1.0.0",
-      description: "API documentation",
+      description:
+        "This swagger was created to make my test task fully documented and informative",
     },
     servers: [
       {
