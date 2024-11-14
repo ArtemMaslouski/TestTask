@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const prisma = new PrismaClient();
 
+//Функция для регистрации
 exports.register = async (req, res) => {
   const { login, password } = req.body;
   const hashedPassword = bcrypt.hashSync(password, 10);
@@ -22,6 +23,7 @@ exports.register = async (req, res) => {
   }
 };
 
+//Функция для логина
 exports.login = async (req, res) => {
   const { login, password } = req.body;
 
@@ -41,6 +43,7 @@ exports.login = async (req, res) => {
   }
 };
 
+//Функция для получения всех пользователей
 exports.getUsers = async (req, res) => {
   try {
     const users = await prisma.user.findMany();
