@@ -34,7 +34,7 @@ exports.createRun = async (req, res) => {
     });
     res.status(201).json({ message: "Забег успешно создан" });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -58,7 +58,7 @@ exports.deleteRun = async (req, res) => {
     await prisma.run.delete({
       where: { id: parseInt(id) },
     });
-    res.status(204).json({ message: "Забег успешно удален" });
+    res.status(200).json({ message: "Забег успешно удален" });
   } catch (error) {
     res.status(404).json({ error: "Забег не найден" });
   }
@@ -98,21 +98,21 @@ exports.getWeeklyReport = async (req, res) => {
         date.setDate(firstDayOfTheWeek.getDate() + 6)
       );
 
-      const weekKey = `${firstDayOfTheWeek.toISOString().split("T")[0]} / ${
+      const key = `${firstDayOfTheWeek.toISOString().split("T")[0]} / ${
         lastDayOfTheWeek.toISOString().split("T")[0]
       }`;
 
-      if (!weeklyData[weekKey]) {
-        weeklyData[weekKey] = {
+      if (!weeklyData[key]) {
+        weeklyData[key] = {
           totalDistance: 0,
           totalTime: 0,
           count: 0,
         };
       }
 
-      weeklyData[weekKey].totalDistance += run.distance;
-      weeklyData[weekKey].totalTime += convertTimeToSeconds(run.time);
-      weeklyData[weekKey].count++;
+      weeklyData[key].totalDistance += run.distance;
+      weeklyData[key].totalTime += convertTimeToSeconds(run.time);
+      weeklyData[key].count++;
     });
 
     const report = Object.keys(weeklyData).map((week) => {

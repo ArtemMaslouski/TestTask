@@ -4,7 +4,7 @@ const authController = require("../controllers/authController");
 
 /**
  * @swagger
- * api/auth/register:
+ * /api/auth/register:
  *  post:
  *      tags: [Auth]
  *      summary: Позволяет зарегистрировать пользователя
@@ -18,45 +18,51 @@ const authController = require("../controllers/authController");
  *              schema:
  *                type: object
  *                properties:
- *                  email:
+ *                  login:
  *                    type: string
- *                    example: user@example.com
+ *                    example: User
  *                  password:
  *                    type: string
- *                    example: strongpassword123
+ *                    example: User
  *
  */
 router.post("/register", authController.register);
-
 /**
  * @swagger
- * api/auth/login:
- *  post:
- *      tags:   [Auth]
- *      summary: Позволяет войти в учетную запись
- *      response:
- *          200:
- *              description: Вход выполнен успешно
- *      requestBody:
- *          required: true
- *          content:
- *            application/json:
- *              schema:
- *                type: object
- *                properties:
- *                  email:
- *                    type: string
- *                    example: user@example.com
- *                  password:
- *                    type: string
- *                    example: strongpassword123
- *
+ * /api/auth/login:
+ *   post:
+ *     tags: [Auth]
+ *     summary: Позволяет войти в учетную запись
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               login:
+ *                 type: string
+ *                 example: User
+ *               password:
+ *                 type: string
+ *                 example: UserPassword123
+ *     responses:
+ *       200:
+ *         description: Вход выполнен успешно
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *                   example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
  */
 router.post("/login", authController.login);
 
 /**
  * @swagger
- * api/auth/get-users:
+ * /api/auth/get-users:
  *   get:
  *      tags:   [Auth]
  *      summary: Возвращает список пользователей
