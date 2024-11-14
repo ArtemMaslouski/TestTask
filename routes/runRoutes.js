@@ -112,4 +112,10 @@ router.put(
   runController.updateRun
 );
 
+router.get(
+  "/getWeeklyUpdates",
+  authMiddleware.verifyToken,
+  runController.getWeeklyReport
+);
+
 module.exports = router;
