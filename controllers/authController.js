@@ -51,6 +51,6 @@ exports.getUsers = async (req, res) => {
     const users = await prisma.user.findMany();
     res.json(users);
   } catch (error) {
-    res.status(500).json({ message: "Ошибка сервера" });
+    res.status(500).json({ message: error.message });
   }
 };

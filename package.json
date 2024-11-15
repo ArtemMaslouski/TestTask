@@ -91,5 +91,8 @@
     "jest-mock-extended": "^4.0.0-beta1",
     "nodemon": "^3.1.7",
     "ts-jest": "^29.2.5"
+  },
+  "engines":{
+    "node": "20.8.0" 
   }
 }
