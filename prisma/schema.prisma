@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("HEROKU_POSTGRESQL_WHITE")
+  url      = env("HEROKU_POSTGRESQL_WHITE_URL")
 }
 
 model User {
