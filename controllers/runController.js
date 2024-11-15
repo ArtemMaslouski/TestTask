@@ -2,23 +2,6 @@ const { PrismaClient } = require("@prisma/client");
 const { message } = require("statuses");
 const prisma = new PrismaClient();
 
-function convertTimeToSeconds(time) {
-  const parts = time.split(":");
-  return (
-    parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2])
-  );
-}
-
-function convertSecondsToTime(seconds) {
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-  const secs = seconds % 60;
-  return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
-    2,
-    "0"
-  )}:${String(secs).padStart(2, "0")}`;
-}
-
 // Создание забега
 exports.createRun = async (req, res) => {
   const { distance, time, date } = req.body;
@@ -111,7 +94,7 @@ exports.getWeeklyReport = async (req, res) => {
       }
 
       weeklyData[key].totalDistance += run.distance;
-      weeklyData[key].totalTime += convertTimeToSeconds(run.time);
+      weeklyData[key].totalTime += convertToSeconds(run.time);
       weeklyData[key].count++;
     });
 
@@ -136,7 +119,7 @@ exports.getWeeklyReport = async (req, res) => {
   }
 };
 
-function convertTimeToSeconds(time) {
+function convertToSeconds(time) {
   const parts = time.split(":");
   return (
     parseInt(parts[0]) * 3600 + parseInt(parts[1]) * 60 + parseInt(parts[2])

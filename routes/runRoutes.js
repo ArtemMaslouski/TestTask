@@ -95,31 +95,42 @@ router.delete(
 
 /**
  * @swagger
- * /api/runs/updateRun/{id}:
+ * /api/runs/updateRuns/{id}:
  *  put:
- *      tags: [Run]
- *      summary: Обновляет запись о забеге по ID.
- *      security:
- *        - BearerAuth: []  # Указываем, что требуется токен
- *      requestBody:
+ *     tags: [Run]
+ *     summary: Изменяет данные о забеге исходя из его id
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: Введите ID забега для редактирования.
+ *         schema:
+ *           type : integer
+ *     security:
+ *       - BearerAuth: []  # Указываем, что требуется токен
+ *     requestBody:
  *          required: true
  *          content:
- *              application/json:
- *                  schema:
- *                      type: object
- *                      properties:
- *                        distance:
- *                          type: number
- *                          format: double
- *                          example: 32.12
- *                        time:
- *                          type: string
- *                          example: "00:00:00"
- *                        date:
- *                          type: string
- *                          format: date
- *                          example: "2024-11-11"
- *
+ *             application/json:
+ *               schema:
+ *                  type: object
+ *                  properties:
+ *                    distance:
+ *                      type: number
+ *                      format: double
+ *                      example: 32.12
+ *                    time:
+ *                      type: string
+ *                      example: "00:00:00"
+ *                    date:
+ *                      type: string
+ *                      format: date
+ *                      example: "2024-11-11"
+ *     responses:
+ *       200:
+ *         description: Забег успешно изменен.
+ *       404:
+ *         description: Забег не найден.
  */
 router.put(
   "/updateRuns/:id",

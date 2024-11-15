@@ -19,6 +19,7 @@
     "define-data-property": "^1.1.4",
     "depd": "^2.0.0",
     "destroy": "^1.2.0",
+    "dotenv": "^16.4.5",
     "ee-first": "^1.1.1",
     "encodeurl": "^2.0.0",
     "es-define-property": "^1.0.0",
@@ -77,13 +78,18 @@
   },
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "nodemon": "^3.1.7"
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "jest-mock-extended": "^4.0.0-beta1",
+    "nodemon": "^3.1.7",
+    "ts-jest": "^29.2.5"
   }
 }
