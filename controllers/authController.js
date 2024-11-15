@@ -17,7 +17,7 @@ exports.register = async (req, res) => {
       },
     });
 
-    res.status(200).json(user);
+    res.status(200).json({ message: "Пользователь успешно создан" });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -36,7 +36,9 @@ exports.login = async (req, res) => {
       });
     }
 
-    const token = jwt.sign({ id: user.id }, "jwt_key", { expiresIn: "1h" });
+    const token = jwt.sign({ id: user.id }, process.env.JWT_KEY, {
+      expiresIn: "1h",
+    });
     res.json({ token });
   } catch (error) {
     res.status(500).json({ error: error.message });

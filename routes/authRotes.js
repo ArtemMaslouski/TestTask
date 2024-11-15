@@ -8,9 +8,6 @@ const authController = require("../controllers/authController");
  *  post:
  *      tags: [Auth]
  *      summary: Позволяет зарегистрировать пользователя
- *      response:
- *          200:
- *              description: Пользователь успешно зарегистрирован
  *      requestBody:
  *          required: true
  *          content:
@@ -24,7 +21,39 @@ const authController = require("../controllers/authController");
  *                  password:
  *                    type: string
  *                    example: User
+ *      responses:
+ *         200:
+ *            description: Пользователь успешно зарегистрирован
+ *            content:
+ *              application/json:
+ *                schema:
+ *                  type: object
+ *                  properties:
+ *                    message:
+ *                      type: string
+ *                      example: "Пользователь успешно зарегистрирован"
  *
+ *         400:
+ *            description: Ошибка валидации данных запроса
+ *            content:
+ *              application/json:
+ *                schema:
+ *                  type: object
+ *                  properties:
+ *                    error:
+ *                      type: string
+ *                      example: "Некорректные данные. Пожалуйста, проверьте ввод."
+ *
+ *         500:
+ *            description: Внутренняя ошибка сервера
+ *            content:
+ *              application/json:
+ *                schema:
+ *                  type: object
+ *                  properties:
+ *                    error:
+ *                      type: string
+ *                      example: "Произошла ошибка на сервере. Попробуйте позже."
  */
 router.post("/register", authController.register);
 /**
@@ -45,7 +74,7 @@ router.post("/register", authController.register);
  *                 example: User
  *               password:
  *                 type: string
- *                 example: UserPassword123
+ *                 example: User
  *     responses:
  *       200:
  *         description: Вход выполнен успешно

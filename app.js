@@ -3,13 +3,14 @@ const bodyParser = require("body-parser");
 const authRoutes = require("./routes/authRotes");
 const runRotes = require("./routes/runRoutes");
 const imageRoutes = require("./routes/imageRoutes");
+require("dotenv").config();
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocs = require("./swagger");
 
 const app = express();
 app.use(bodyParser.json());
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use("/api/runs", runRotes);
