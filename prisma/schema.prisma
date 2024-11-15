@@ -10,7 +10,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("postgresql://postgres:Artsiom_20031@localhost:5432/TestTask?schema=public")
 }
 
 model User {
