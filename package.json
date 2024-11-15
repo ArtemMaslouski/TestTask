@@ -85,7 +85,6 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@prisma/client": "^5.22.0",
     "@types/jest": "^29.5.14",
     "jest": "^29.7.0",
     "jest-mock-extended": "^4.0.0-beta1",
